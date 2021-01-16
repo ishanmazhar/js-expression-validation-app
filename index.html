@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<title>Expression Validator</title>
+	<style>
+        body {
+            background-color: teal;
+        }
+		.btn {
+            display: block;
+    		margin-left: auto;
+    		margin-right: auto;
+        }
+        
+        .jumbotron {
+            background-color: rgb(49, 18, 80);
+            color: whitesmoke;
+            margin: 10px;
+			display: block;
+    		margin-left: auto;
+    		margin-right: auto;
+			text-align: center;	
+            height: 450px;
+		}
+		.footer {
+			position: absolute;
+			margin: 10px;
+			left: 0;
+            right: 0;
+			bottom: 0;
+			/* width: 100%; */
+			border-radius: 5px;
+			background-color: rgb(65, 8, 65);
+			color: white;
+			font-weight: bold;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="jumbotron">
+            <h1>Expression Validator</h1>
+            <h4>Please select the option you want to validate</h4><hr>
+            <button id="email" class="btn btn-primary">Email</button><br>
+            <button id="phone" class="btn btn-primary">Phone Number</button><br>
+            <button id="post-code" class="btn btn-primary">Post Code</button>
+		</div>
+		<footer class="footer">
+			<p>Developed by Md. Mazharul Hasan Nur<br>
+				Learner<br>
+				FSMERN001<br>
+				Bohubrihi
+			</p>
+		</footer>
+	</div>
+	
+    <script>
+        let email = document.getElementById('email');
+        let phoneNumber = document.getElementById('phone');
+        let postCode = document.getElementById('post-code');
+
+        email.addEventListener('click', validateEmail);
+        phoneNumber.addEventListener('click', validatePhone);
+        postCode.addEventListener('click', validatePostCode); 
+
+        function validateEmail() {
+            let email = prompt('Please enter your email address'); 
+            console.log(email);
+
+            var validateEmailAddress = (email) => {
+                let at = /[@]/;
+                let dot = /[.]/; 
+                if(at.test(email)) {
+                    if(dot.test(email)) {
+                        alert(`'${email}' is a valid email address.`);
+                    } else {
+                        alert(`'${email}' is not a valid email address.`);
+                    } 
+                } else {
+                    alert(`'${email}' is not a valid email address.`);
+                }
+            }
+            validateEmailAddress(email);
+        }
+
+        function validatePhone() {
+            let phone = prompt('Please enter your 11-digit phone number'); 
+            phone = parseInt(phone);
+            console.log(isNaN(phone));
+            console.log(typeof phone);
+            console.log((phone));
+            // console.log(digitCount(phone));
+
+            if(isNaN(phone)) {
+                alert('Please enter a valid 11-digit phone number');
+                return;
+            }
+
+            if(digitCount(phone) === 11) {
+                alert('Phone number is valid');
+                return;
+            }
+
+            alert('Phone number is invalid');
+        }
+
+        function validatePostCode() {
+            let postCode = prompt('Please enter your 4-digit post code'); 
+            postCode = parseInt(postCode);
+
+            if(isNaN(postCode)) {
+                alert('Please enter a valid 4-digit post code');
+                return;
+            }
+
+            if(digitCount(postCode) === 4) {
+                alert('Post code is valid');
+                return;
+            }
+
+            alert('Post code is invalid');
+        }
+
+        function digitCount(n) { // counts the number of digits of a number
+            let count = 0, rem;
+
+            while (n != 0) {
+                rem = n % 10;
+                n /= 10;
+                n = Math.floor(n); 
+                ++count;
+            }
+
+            return count;
+        }
+
+        // function digitSum(n) { // computes sum of digits of a number
+
+        //     let rem, sum = 0; 
+        //     while (n != 0) {
+        //         rem = n % 10;
+        //         sum = sum + rem;
+        //         n = n / 10;
+        //         n = Math.floor(n);
+        //     }
+        //     return sum;
+        // }
+
+        // function reverse(n) {// reverses the digits of a number
+
+        //     let rev = 0; 
+
+        //     while (n != 0) { 
+        //         rev = (rev * 10) + (n % 10); 
+        //         n /= 10; 
+        //         n = Math.floor(n);
+        //     } 
+
+        //     return rev; 
+        // } 
+
+        // console.log(reverse(12345));
+        // console.log(digitCount(123456));
+        // console.log(digitSum(12345));
+    </script>
+</body>
+
+</html>
